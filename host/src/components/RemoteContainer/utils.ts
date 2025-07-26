@@ -1,4 +1,4 @@
-let lastInstance = "";
+let lastInstanceId = "";
 
 export const fixRemotePathsInDevMode = (
   rawHtml: string,
@@ -7,18 +7,13 @@ export const fixRemotePathsInDevMode = (
   let html = rawHtml;
   if (import.meta.env.DEV) {
     const instanceId = html.match(/q:instance="(\w+)"/m);
-    lastInstance = instanceId[1];
+    lastInstanceId = instanceId[1];
 
-    html = html.replace(
-      /q:base="(?:https?:\/\/)?([^\/]+)\/build\/?"/gm,
-      (match, child, child2) => {
-        console.log(child);
-        base = "http://localhost:4567";
-        console.log(base);
-        // console.log('FOUND', base);
-        return match;
-      },
-    );
+    html = html.replace(/q:base="([^\/]+)\/build\/?"/gm, (match, child) => {
+      base = child;
+      // console.log('FOUND', base);
+      return match;
+    });
     html = html.replace(/from "\/src/gm, () => {
       // console.log('REPLACE', path);
       return `from "/${base}/src`;
@@ -39,20 +34,11 @@ export const fixRemotePathsInDevMode = (
 
 const fixErroredHostClash = (html: string, base: string) =>
   html
-    .replace(
-      /ErroredHost/gm,
-      `ErroredHost${base.replace(/\//g, "").replace(/\:/g, "")}${lastInstance}`,
-    )
-    .replace(
-      /errored-host/gm,
-      `errored-host-${base.replace(/\//g, "").replace(/\:/g, "")}${lastInstance}`,
-    );
+    .replace(/ErroredHost/gm, `ErroredHost${lastInstanceId}`)
+    .replace(/errored-host/gm, `errored-host-${lastInstanceId}`);
 
 const fixImageWarningClash = (html: string, base: string) =>
-  html.replace(
-    /image-warning/gm,
-    `image-warning-${base.replace(/\//g, "").replace(/\:/g, "")}${lastInstance}`,
-  );
+  html.replace(/image-warning/gm, `image-warning-${lastInstanceId}`);
 
 // NOTE: this is a try to make a client side SSR (to fetch SSR html and embed it to the client)
 // there are issues with react widget - it always catches hydration errors for some reason
