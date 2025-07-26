@@ -7,6 +7,21 @@ Second widget is written in react and wrapped in qwikify adapter.
 
 To run this application, install deps in each microfrontend and follow their readme.
 
+## Development
+
+node v22
+
+pnpm v10
+
+
+Install deps in all projects - host, widget-counter.
+
+
+Dev mode: run `pnpm run dev` commands in each project
+
+
+Prod mode: run `pnpm run showcase` commands in each project
+
 ## Problem
 
 The project we are building has a micro-frontend architecture, so we’d like to leverage qwik containers (an independent application that embeds to a host). Also, we wanna have an SPA-like routing - so that when navigating between pages, nothing is rendered on the server, only on the client side. Third important piece of the puzzle is fully dynamic routing. The nature of the product cannot allow us to hardcode the layouts and the pages; all information comes from the CMS.

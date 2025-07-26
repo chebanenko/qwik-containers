@@ -11,9 +11,10 @@ export default component$(() => {
 
         <div class={styles.links}>
           <Link class={styles.link} href="/">home</Link>
-          <Link class={styles.link} href="/logo">logo</Link>
+          {/* <Link class={styles.link} href="/logo">logo</Link> */}
+          <Link class={styles.link} href="/foo">static</Link>
           <Link class={styles.link} href="/counter">counter</Link>
-          <Link class={styles.link} href="/react">react</Link>
+          {/* <Link class={styles.link} href="/react">react</Link> */}
         </div>
       </div>
       <br />

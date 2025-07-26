@@ -6,7 +6,7 @@ import {
 } from "@builder.io/qwik";
 
 const Timer = component$(() => {
-  const time = useSignal("time");
+  const time = useSignal(new Date().toISOString());
 
   useVisibleTask$(({ cleanup }) => {
     const update = () => (time.value = new Date().toLocaleTimeString());

@@ -7,7 +7,6 @@ import { renderWidget } from "../../dist/server/ssr.js";
 const qwikPlugin = async (fastify, options) => {
   const { buildDir, outputDir, distDir, assetsDir } = options;
 
-  console.log(outputDir)
   fastify.register(fastifyStatic, {
     root: outputDir,
     prefix: "/w/counter/c/",

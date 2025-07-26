@@ -35,7 +35,6 @@ export default component$(() => {
   const d = loader();
   const openLocal = useSignal(true);
   const openClientSideSsr = useSignal(true);
-  const openClient = useSignal(true);
 
   return (
     <>
@@ -91,67 +90,8 @@ export default component$(() => {
             <RemoteContainer
               type="counter"
               host="http://localhost:4567"
-              htmlStreaming={true}
+              htmlStreaming
             />
-          )}
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <button
-            onClick$={() => {
-              openClient.value = !openClient.value;
-            }}
-          >
-            toggle client
-          </button>
-          <br />
-          This is an example of fetching completely separate client bundle built
-          only for use client side
-          <br />
-          {openClient.value && (
-            <RemoteContainer type="counter" host="http://localhost:4567" />
-          )}
-        </>
-      )}
-      {loc.url.pathname.match("react") && (
-        <>
-          <button
-            onClick$={() => {
-              openClientSideSsr.value = !openClientSideSsr.value;
-            }}
-          >
-            toggle client side SSR
-          </button>
-          <br />
-          This is an example of client side SSR
-          <br />
-          {openClientSideSsr.value && (
-            <RemoteContainer
-              type="react"
-              host="http://localhost:4568"
-              htmlStreaming={true}
-            />
-          )}
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <button
-            onClick$={() => {
-              openClient.value = !openClient.value;
-            }}
-          >
-            toggle client
-          </button>
-          <br />
-          This is an example of fetching completely separate client bundle built
-          only for use client side
-          <br />
-          {openClient.value && (
-            <RemoteContainer type="react" host="http://localhost:4568" />
           )}
         </>
       )}
