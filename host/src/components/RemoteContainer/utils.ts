@@ -7,7 +7,9 @@ export const fixRemotePathsInDevMode = (
   let html = rawHtml;
   if (import.meta.env.DEV) {
     const instanceId = html.match(/q:instance="(\w+)"/m);
-    lastInstanceId = instanceId[1];
+    if (instanceId) {
+      lastInstanceId = instanceId[1];
+    }
 
     html = html.replace(/q:base="([^\/]+)\/build\/?"/gm, (match, child) => {
       base = child;
