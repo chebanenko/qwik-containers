@@ -125,7 +125,6 @@ export async function getClientStream(targetNode, endpoint, options = {}) {
     console.error("Streaming error:", error);
     buffer = `<div style="color: red;">Error loading content: ${error.message}</div>`;
   } finally {
-    console.log(buffer);
     writeHtml(targetNode, buffer);
   }
 }
