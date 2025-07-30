@@ -50,6 +50,7 @@ export const writeHtml = (root: HTMLElement, html: string) => {
   let scripts = [
     ...htmlDocument.querySelectorAll("script"),
     { innerHTML: "console.log(123)", attributes: [] },
+    { innerHTML: "var e=document.querySelectorAll('[on\\\\:qvisible]');if(e.length){const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.dispatchEvent(new CustomEvent('qvisible')),o.unobserve(e.target))})});e.forEach(e=>o.observe(e))}", attributes: [] },
   ];
 
   scripts = scripts.map((s) => {
@@ -124,6 +125,7 @@ export async function getClientStream(targetNode, endpoint, options = {}) {
     console.error("Streaming error:", error);
     buffer = `<div style="color: red;">Error loading content: ${error.message}</div>`;
   } finally {
+    console.log(buffer);
     writeHtml(targetNode, buffer);
   }
 }
